@@ -1,26 +1,6 @@
 from flask import render_template, url_for, request, redirect
 from dbinit import app, db
 from model import Department, District, ProductCat, ProductType, Product, ProductCatAttr, PersonnelCat, Personnel, PersonnelCatAttr, Brigade, TestingLab, Test, TestingEquipment, ProductWorkProcess
-    #, TechnicalStaffCat, TechnicalStaff, WorkmanCat, Workman, Tester
-'''
-app.config['MYSQL_HOST'] = "localhost"
-app.config['MYSQL_USER'] = "root"
-app.config['MYSQL_PASSWORD'] = "zaqwsxcde"
-app.config['MYSQL_DB'] = "aircraftcompany"
-
-
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(80), unique=True)
-
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-'''
-
-# mysql = MySQL(app)
 
 
 @app.route('/')
