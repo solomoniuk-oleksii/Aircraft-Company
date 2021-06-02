@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - Products
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">Products</h3>
+<div class="row">
+    <div class="col-3">
+<form method="POST">
+    <div class="form-group">
+        <label for="inpSel0" class="control-label">Filter by category</label>
+        <div >
+            <select size="1" name="cat" id="inpSel0" class="form-control">
+                <option value="0"></option>
+                {% for cat in cats %}
+                <option value="{{cat.id}}">{{cat.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel01" class="control-label">Filter by department</label>
+        <div >
+            <select size="1" name="dep" id="inpSel01" class="form-control">
+                <option value="0"></option>
+                {% for dep in deps %}
+                <option value="{{dep.id}}">{{dep.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel02" class="control-label">Filter by district</label>
+        <div >
+            <select size="1" name="district" id="inpSel02" class="form-control">
+                <option value=""></option>
+                {% for distr in distrs %}
+                <option value="{{distr.id}}">{{distr.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpBegDate" class="control-label">Assembled between </label>
+        <div >
+            <input type="date" name="begDate" id="inpBegDate" class="form-control" placeholder="Begin date">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpEndDate" class="control-label">and</label>
+        <div >
+        <input type="date" name="endDate" id="inpEndDate" class="form-control" placeholder="End date">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpChBox" class="control-label">Still Assembling</label>
+        <div >
+            <input id="inpChBox"  type="checkbox" name="assembling" value="on">
+        </div>
+    </div>
+    <div class="form-group border-top">
+        <label for="inpSel03" class="control-label">Tested in:</label>
+        <div >
+            <select size="1" name="testinglab" id="inpSel03" class="form-control">
+                <option value=""></option>
+                {% for lab in labs %}
+                <option value="{{lab.id}}">{{lab.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpBegDate02" class="control-label">Tested between </label>
+        <div >
+            <input type="date" name="testBegDate" id="inpBegDate02" class="form-control" placeholder="Begin date">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpEndDate02" class="control-label">and</label>
+        <div >
+        <input type="date" name="testEndDate" id="inpEndDate02" class="form-control" placeholder="End date">
+        </div>
+    </div>
+    <input type="submit" class="btn btn-secondary">
+</form>
+        </div>
+
+
+    <div class="col-9">
+<table style="width:100%;margin:auto;text-align:center;" class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Department</th>
+        <th>Assembly Date</th>
+    </thead>
+    {% for prod in products %}
+    <tr>
+        <td>{{prod.id}}</td>
+        <td>{{prod.name}}</td>
+        <td>{{prod.status}}</td>
+        <td>{{prod.type.cat.name}}</td>
+        <td>{{prod.type.name}}</td>
+        <td>{{prod.department.name}}</td>
+        <td>{{prod.assembly_date}}</td>
+    </tr>
+    <tr><td colspan="7">
+        <div class="row">
+            <div class="col">
+        <div>Engine power: {{prod.prod_cat_attr.engine_power}}</div>
+        <div>Wind min speed: {{prod.prod_cat_attr.wind_min_speed}}</div>
+        <div>Wind max speed: {{prod.prod_cat_attr.wind_max_speed}}</div>
+            </div>
+            <div class="col">
+        <div>Wingspan: {{prod.prod_cat_attr.wingspan}}</div>
+        <div>Flight speed: {{prod.prod_cat_attr.flight_speed}}</div>
+        <div>Engine number: {{prod.prod_cat_attr.engine_num}}</div>
+            </div>
+            <div class="col">
+        <div>Explosion power: {{prod.prod_cat_attr.explosion_power}}</div>
+            </div>
+        </div>
+    </td></tr>
+    {% endfor %}
+    <tr><td colspan="7">Total: {{total}}</td></tr>
+</table>
+    </div>
+    </div>
+<br>
+<div class="border-top"></div>
+<br>
+<h4>Add</h4>
+<form method="GET" action="/addproduct" class="form-horizontal">
+    <div class="form-group">
+        <label for="inpSel" class=" control-label">Select product category</label>
+        <div >
+            <select size="1" name="cats" id="inpSel" class="form-control">
+                {% for cat in cats %}
+                <option value="{{cat.id}}">{{cat.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-secondary">
+</form>
+<br>
+{% endblock %}
+
+

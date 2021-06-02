@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - Testing Equipment
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">Testing Equipment</h3>
+<div class="row">
+    <div class="col-3">
+<form method="POST">
+    <div class="form-group">
+        <label for="inpSel01" class=" control-label">Testing product:</label>
+        <div>
+            <select size="1" name="product" id="inpSel01" class="form-control">
+                <option value="" selected></option>
+                {% for prod in prods %}
+                <option value="{{prod.id}}">{{prod.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel02" class=" control-label">Tested products of category:</label>
+        <div>
+            <select size="1" name="category" id="inpSel02" class="form-control">
+                <option value=""></option>
+                {% for cat in cats %}
+                <option value="{{cat.id}}">{{cat.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel03" class=" control-label">Tested in:</label>
+        <div>
+            <select size="1" name="testinglab" id="inpSel03" class="form-control">
+                <option value=""></option>
+                {% for lab in labs %}
+                <option value="{{lab.id}}">{{lab.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpBegDate02" class=" control-label">Tested between </label>
+        <div>
+            <input type="date" name="testBegDate" id="inpBegDate02" class="form-control" placeholder="Begin date">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpEndDate02" class=" control-label">and</label>
+        <div>
+        <input type="date" name="testEndDate" id="inpEndDate02" class="form-control" placeholder="End date">
+        </div>
+    </div>
+    <input type="submit" class="btn btn-secondary">
+</form>
+    </div>
+    <div class="col-9">
+<table style="width:100%;margin:auto;text-align:center;" class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+    </thead>
+    {% for equip in equips %}
+    <tr>
+        <td>{{equip.id}}</td>
+        <td>{{equip.name}}</td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="7">Total: {{total}}</td></tr>
+</table>
+    </div>
+</div>
+
+{% endblock %}
+
+

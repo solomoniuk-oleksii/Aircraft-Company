@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - District
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">District</h3>
+<form method="POST">
+    <div class="form-group">
+        <label for="inpSel0" class="control-label">Filter by department</label>
+        <div>
+            <select size="1" name="department" id="inpSel0" class="form-control">
+                <option value="" selected></option>
+                {% for dep in deps %}
+                <option value="{{dep.id}}">{{dep.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-secondary">
+</form>
+
+
+<br>
+<table style="width:100%;margin:auto;text-align:center;" class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Department</th>
+    </thead>
+    {% for dist in dists %}
+    <tr>
+        <td>{{dist.id}}</td>
+        <td>{{dist.name}}</td>
+        <td>{{dist.department.name}}</td>
+    </tr>
+    <tr><td colspan="3" >
+        <table style="width:100%;margin:auto;text-align:center;" class="table table-sm">
+        <tr style="font-style: italic;">
+            <td>Chief Id</td>
+            <td>Chief Full Name</td>
+            <td>Chief Category</td>
+            <td>Chief Address</td>
+            <td>Chief Master</td>
+            <td>Chief Department</td>
+        </tr>
+            <tr class="table-light">
+            <td>{{dist.chief.id}}</td>
+            <td>{{dist.chief.fullname}}</td>
+            <td>{{dist.chief.personnel_cat.name}}</td>
+            <td>{{dist.chief.address}}</td>
+            {% if dist.chief.master == 1 %}<td>Yes</td>
+            {% else %}<td>No</td>{% endif %}
+            <td>{{dist.chief.department.name}}</td>
+        </tr>
+        </table>
+    </tr>
+    </td>
+    {% endfor %}
+    <tr><td colspan="3">Total: {{total}}</td></tr>
+</table>
+
+
+{% endblock %}
+
+

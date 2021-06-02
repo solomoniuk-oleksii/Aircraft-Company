@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - Laboratory
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">Laboratory</h3>
+<form method="POST">
+    <div class="form-group">
+        <label for="inpSel02" class=" control-label">Tested product:</label>
+        <div>
+            <select size="1" name="product" id="inpSel02" class="form-control">
+                <option value="" selected></option>
+                {% for prod in prods %}
+                <option value="{{prod.id}}">{{prod.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-secondary">
+</form>
+
+
+<br>
+<table style="width:100%;margin:auto;text-align:center;" class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+
+    </thead>
+    {% for lab in labs %}
+    <tr>
+        <td>{{lab.id}}</td>
+        <td>{{lab.name}}</td>
+    </tr>
+    {% endfor %}
+    <tr><td colspan="7">Total: {{total}}</td></tr>
+</table>
+
+
+{% endblock %}
+
+

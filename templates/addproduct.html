@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - Add Product
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">Add product</h3>
+<form method="POST" action="/addproduct" class="form-horizontal">
+    <div class="form-group">
+        <label for="inpName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" name="name" id="inpName" class="form-control" placeholder="Name" required>
+        </div>
+        </div>
+    <div class="form-group">
+        <label for="inpStatus" class="col-sm-2 control-label">Status</label>
+        <div class="col-sm-10">
+            <input type="text" name="status" id="inpStatus" class="form-control" placeholder="Status">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel" class="control-label">Select product type</label>
+        <div class="col-sm-10">
+            <select size="1" name="types" id="inpSel" class="form-control">
+                {% for type in types %}
+                <option value="{{type.id}}">{{type.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel2" class="control-label">Select Department</label>
+        <div class="col-sm-10">
+            <select size="1" name="deps" id="inpSel2" class="form-control">
+                {% for dep in deps %}
+                <option value="{{dep.id}}">{{dep.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpDate" class="col-sm-2 control-label">Date</label>
+        <div class="col-sm-10">
+            <input type="date" name="date" id="inpDate" class="form-control" placeholder="Date">
+        </div>
+    </div>
+    {% if cat in [1, 3] %}
+    <div class="form-group">
+        <label for="inpAttr1" class="col-sm-2 control-label">Engine power</label>
+        <div class="col-sm-10">
+            <input type="text" name="eng_pow" id="inpAttr1" class="form-control" placeholder="Engine power">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="eng_pow" value="">
+    {% endif %}
+
+    {% if cat in [2, 4] %}
+    <div class="form-group">
+        <label for="inpAttr2" class="col-sm-2 control-label">Wind min speed</label>
+        <div class="col-sm-10">
+            <input type="text" name="wind_min_speed" id="inpAttr2" class="form-control" placeholder="Wind min speed">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="wind_min_speed" value="">
+    {% endif %}
+    {% if cat in [2, 4] %}
+    <div class="form-group">
+        <label for="inpAttr3" class="col-sm-2 control-label">Wind max speed</label>
+        <div class="col-sm-10">
+            <input type="text" name="wind_max_speed" id="inpAttr3" class="form-control" placeholder="Wind max speed">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="wind_max_speed" value="">
+    {% endif %}
+    {% if cat in [1, 2, 4] %}
+    <div class="form-group">
+        <label for="inpAttr4" class="col-sm-2 control-label">Wingspan</label>
+        <div class="col-sm-10">
+            <input type="text" name="wingspan" id="inpAttr4" class="form-control" placeholder="Wingspan">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="wingspan" value="">
+    {% endif %}
+    {% if cat in [5] %}
+    <div class="form-group">
+        <label for="inpAttr5" class="col-sm-2 control-label">Flight speed</label>
+        <div class="col-sm-10">
+            <input type="text" name="flight_speed" id="inpAttr5" class="form-control" placeholder="Flight speed">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="flight_speed" value="">
+    {% endif %}
+    {% if cat in [1] %}
+    <div class="form-group">
+        <label for="inpAttr6" class="col-sm-2 control-label">Engine number</label>
+        <div class="col-sm-10">
+            <input type="text" name="eng_num" id="inpAttr6" class="form-control" placeholder="Engine number">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="eng_num" value="">
+    {% endif %}
+    {% if cat in [5] %}
+    <div class="form-group">
+        <label for="inpAttr7" class="col-sm-2 control-label">Explosion power</label>
+        <div class="col-sm-10">
+            <input type="text" name="expl_pow" id="inpAttr7" class="form-control" placeholder="Explosion power">
+        </div>
+    </div>
+    {% else %}
+    <input type="hidden" name="expl_pow" value="">
+    {% endif %}
+    <input type="submit" class="btn btn-secondary">
+</form>
+{% endblock %}

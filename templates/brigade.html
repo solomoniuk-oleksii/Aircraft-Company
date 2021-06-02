@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Aircraft Company - Brigade
+{% endblock %}
+
+{% block body %}
+<h3 class="pb-4 mb-4 fst-italic border-bottom">Brigade</h3>
+<div class="row">
+    <div class="col-3">
+<form method="POST">
+    <div class="form-group">
+        <label for="inpSel0" class=" control-label">Filter by department</label>
+        <div>
+            <select size="1" name="department" id="inpSel0" class="form-control">
+                <option value="" selected></option>
+                {% for dep in deps %}
+                <option value="{{dep.id}}">{{dep.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel01" class=" control-label">Filter by district</label>
+        <div>
+            <select size="1" name="district" id="inpSel01" class="form-control">
+                <option value="" selected></option>
+                {% for distr in distrs %}
+                <option value="{{distr.id}}">{{distr.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inpSel02" class=" control-label">Working on:</label>
+        <div>
+            <select size="1" name="product" id="inpSel02" class="form-control">
+                <option value="" selected></option>
+                {% for prod in prods %}
+                <option value="{{prod.id}}">{{prod.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-secondary">
+</form>
+    </div>
+
+<div class="col-9">
+<table style="width:100%;margin:auto;text-align:center;" class="table table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Chief</th>
+        <th>District</th>
+
+    </thead>
+    {% for brigade in brigades %}
+    <tr>
+        <td>{{brigade.id}}</td>
+        <td>{{brigade.name}}</td>
+        <td>{{brigade.chief.fullname}}</td>
+        <td>{{brigade.district.name}}</td>
+    </tr>
+    <tr><td colspan="7">
+        <table style="width:100%;margin:auto;text-align:center;" class="table table-sm">
+    <tr style="font-style:italic;">
+        <td>Id</td>
+        <td>Full Name</td>
+        <td>Category</td>
+        <td>Address</td>
+        <td>Master</td>
+        <td>Department</td>
+    </tr>
+    {% for worker in workers %}
+        {% if worker.brigade_id == brigade.id %}
+            <tr class="table-light">
+            <td>{{worker.id}}</td>
+            <td>{{worker.fullname}}</td>
+            <td>{{worker.personnel_cat.name}}</td>
+            <td>{{worker.address}}</td>
+            {% if worker.master == 1 %}<td>Yes</td>
+            {% else %}<td>No</td>{% endif %}
+            <td>{{worker.department.name}}</td>
+        </tr>
+        {% else %}
+        {% endif %}
+    {% endfor %}
+
+</table>
+    {% endfor %}
+    <tr><td colspan="7">Total: {{total}}</td></tr>
+</table>
+</div>
+</div>
+
+
+{% endblock %}
+
+
